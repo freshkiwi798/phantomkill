@@ -272,7 +272,7 @@ OldNameCall = hookmetamethod(game, "__namecall", function(self, ...)
 local Args = {
 ...
 }
-if self.Name == "rebirthRemote" and Args[1] == "rebirthRequest" then
+if self.Name == "rebirthRemote" and ... == "rebirthRequest" then
   return
 end
 return OldNameCall(self, unpack(Args))
@@ -500,7 +500,7 @@ mt.__namecall = newcclosure(function(self, ...)
 local method = getnamecallmethod()
 local args = { ... }
 
-if method == "FireServer" and args[1] == "proteinEgg" and BlockEggEating then
+if method == "FireServer" and ... == "proteinEgg" and BlockEggEating then
   return
 end
 
@@ -890,8 +890,7 @@ end)
 Killer:AddSwitch("View Player", function(bool)
 spying = bool
 if not spying then
-  local cam = workspace.CurrentCamera
-  cam.CameraSubject = LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("Humanoid") or LocalPlayer
+  workspace.CurrentCamera.CameraSubject = LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("Humanoid") or LocalPlayer
   return
 end
 task.spawn(function()
